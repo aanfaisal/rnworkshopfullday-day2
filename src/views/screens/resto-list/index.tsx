@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Button, Text, TextInput, View, ActivityIndicator } from 'react-native'
 import { Api } from '../../../services/api'
 import { AppStyle } from '../../styles'
 import { RestoListScreenProps } from './props'
@@ -13,22 +13,52 @@ export class RestoListScreen extends React.Component<
   constructor(props: RestoListScreenProps) {
     super(props)
     this.state = {
-      restaurants: []
+      restaurants: [],
+      query: '',
+      loading: false
     }
   }
 
-  async componentDidMount() {
-    const restaurants = await Api.loadRestaurants()
-    this.setState({ restaurants })
+  loadData() {
+    this.setState({ loading: true }, async () => {
+      const restaurants = await Api.loadRestaurants(this.state.query)
+      this.setState({ restaurants, loading: false, query: '' })
+    })
   }
 
   public render() {
     const { theme } = this.props as Required<RestoListScreenProps>
-    const { restaurants } = this.state
+    const { query } = this.state
 
     return (
       <View style={theme.styles.screenContainer}>
-        <Text style={{ color: theme.vars.colors.text }}>RestoListScreen</Text>
+        <TextInput
+          style={theme.styles.textInput}
+          value={query}
+          onChangeText={val => this.setState({ query: val })}
+        />
+        <Button
+          title="Cari"
+          onPress={() => {
+            this.loadData()
+          }}
+        />
+
+        {this.renderList()}
+      </View>
+    )
+  }
+
+  renderList() {
+    const { restaurants, loading } = this.state
+    const { theme } = this.props as Required<RestoListScreenProps>
+
+    if (loading) {
+      return <ActivityIndicator color={theme.vars.colors.text} />
+    }
+
+    return (
+      <View>
         {restaurants.map(r => (
           <Text key={r.id}>{r.name}</Text>
         ))}
