@@ -3,3 +3,4 @@
 // --------------------------------------------------------- //
 
 export { BaseTheme } from './base'
+export { BlueTheme } from './blue'

@@ -1,6 +1,7 @@
 import { createMaterialTopTabNavigator } from 'react-navigation'
 import { FavoriteRestoListScreen } from '../favorite-resto-list'
 import { RestoListScreen } from '../resto-list'
+import { SettingsScreen } from '../settings'
 
 export const MainScreenNav = createMaterialTopTabNavigator(
   {
@@ -14,6 +15,12 @@ export const MainScreenNav = createMaterialTopTabNavigator(
       screen: FavoriteRestoListScreen,
       navigationOptions: {
         title: 'Favorite Resto List'
+      }
+    },
+    Settings: {
+      screen: SettingsScreen,
+      navigationOptions: {
+        title: 'Settings'
       }
     }
   },

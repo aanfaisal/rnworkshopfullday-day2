@@ -55,7 +55,11 @@ export default class App extends Component<any, State> {
    */
   renderMain() {
     return (
-      <AppStyle.Provider>
+      <AppStyle.Provider
+        getDefault={async () => {
+          return 'blue'
+        }}
+      >
         <AppStore.Provider>
           <MainScreen />
         </AppStore.Provider>
