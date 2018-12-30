@@ -2,7 +2,13 @@ import { AppThunkAction } from '..'
 import { Resto } from '../../services/models/restaurant'
 
 export function addFavoriteAction(payload: Resto): AppThunkAction {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { favoriteRestoList } = getState().resto
+
+    if (favoriteRestoList.find(r => r.id === payload.id)) {
+      return
+    }
+
     dispatch({ type: 'RESTO/ADD', payload })
   }
 }

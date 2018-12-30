@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, View, Button } from 'react-native'
+import { Button, FlatList, View } from 'react-native'
 import { AppStore } from '../../../store'
 import {
   clearFavoritesAction,
