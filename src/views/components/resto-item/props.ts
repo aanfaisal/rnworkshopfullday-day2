@@ -3,4 +3,5 @@ import { AppStyleProps } from '../../styles'
 
 export interface RestoItemProps extends Partial<AppStyleProps> {
   item: Resto
+  onPress?: () => void
 }

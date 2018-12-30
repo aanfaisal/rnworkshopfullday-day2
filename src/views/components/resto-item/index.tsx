@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { AppStyle } from '../../styles'
 import { RestoItemProps } from './props'
 
@@ -12,13 +12,14 @@ export class RestoItem extends React.Component<RestoItemProps> {
   public render() {
     const {
       item,
-      theme: { styles }
+      theme: { styles },
+      onPress,
     } = this.props as Required<RestoItemProps>
     return (
-      <View style={styles.restoItemContainer}>
+      <TouchableOpacity onPress={onPress} style={styles.restoItemContainer}>
         <Text style={styles.restoItemName}>{item.name}</Text>
         <Text>{item.address}</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 }

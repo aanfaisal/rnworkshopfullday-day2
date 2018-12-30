@@ -7,12 +7,17 @@ import {
   View
 } from 'react-native'
 import { Api } from '../../../services/api'
+import { AppStore } from '../../../store'
+import { addFavoriteAction } from '../../../store/actions/resto'
 import { RestoItem } from '../../components/resto-item'
 import { AppStyle } from '../../styles'
-import { RestoListScreenProps } from './props'
+import { RestoListScreenActionProps, RestoListScreenProps } from './props'
 import { RestoListScreenState } from './state'
 
 @AppStyle.withThemeClass()
+@AppStore.withStoreClass<any, RestoListScreenActionProps>(null, dispatch => ({
+  addFavorite: payload => dispatch(addFavoriteAction(payload))
+}))
 export class RestoListScreen extends React.Component<
   RestoListScreenProps,
   RestoListScreenState
@@ -58,7 +63,7 @@ export class RestoListScreen extends React.Component<
 
   renderList() {
     const { restaurants, loading } = this.state
-    const { theme } = this.props as Required<RestoListScreenProps>
+    const { theme, addFavorite } = this.props as Required<RestoListScreenProps>
 
     if (loading) {
       return <ActivityIndicator color={theme.vars.colors.text} />
@@ -68,7 +73,14 @@ export class RestoListScreen extends React.Component<
       <FlatList
         data={restaurants}
         keyExtractor={r => r.id}
-        renderItem={val => <RestoItem item={val.item} />}
+        renderItem={val => (
+          <RestoItem
+            item={val.item}
+            onPress={() => {
+              addFavorite(val.item)
+            }}
+          />
+        )}
       />
     )
 

@@ -1,6 +1,7 @@
 import { AppLoading, Asset } from 'expo'
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import { AppStore } from './store'
 import { MainScreen } from './views/screens/main'
 import { AppStyle } from './views/styles'
 
@@ -54,7 +55,9 @@ export default class App extends Component<any, State> {
   renderMain() {
     return (
       <AppStyle.Provider>
-        <MainScreen />
+        <AppStore.Provider>
+          <MainScreen />
+        </AppStore.Provider>
       </AppStyle.Provider>
     )
   }
@@ -88,5 +91,6 @@ export default class App extends Component<any, State> {
    */
   async prepare(): Promise<void> {
     await Asset.loadAsync(require('../assets/logo.png'))
+    await AppStore.init()
   }
 }
