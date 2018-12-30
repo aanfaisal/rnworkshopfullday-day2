@@ -1,6 +1,13 @@
 import React from 'react'
-import { Button, Text, TextInput, View, ActivityIndicator } from 'react-native'
+import {
+  ActivityIndicator,
+  Button,
+  FlatList,
+  TextInput,
+  View
+} from 'react-native'
 import { Api } from '../../../services/api'
+import { RestoItem } from '../../components/resto-item'
 import { AppStyle } from '../../styles'
 import { RestoListScreenProps } from './props'
 import { RestoListScreenState } from './state'
@@ -58,11 +65,19 @@ export class RestoListScreen extends React.Component<
     }
 
     return (
-      <View>
-        {restaurants.map(r => (
-          <Text key={r.id}>{r.name}</Text>
-        ))}
-      </View>
+      <FlatList
+        data={restaurants}
+        keyExtractor={r => r.id}
+        renderItem={val => <RestoItem item={val.item} />}
+      />
     )
+
+    // return (
+    //   <View>
+    //     {restaurants.map(r => (
+    //       <RestoItem key={r.id} item={r} />
+    //     ))}
+    //   </View>
+    // )
   }
 }

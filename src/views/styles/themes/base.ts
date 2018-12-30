@@ -22,6 +22,16 @@ export const BaseTheme = createTheme(
       backgroundColor: vars.colors.inputTextBackground,
       padding: vars.spacing.small,
       marginBottom: vars.spacing.small
+    },
+    restoItemContainer: {
+      marginTop: vars.spacing.small,
+      borderBottomColor: vars.colors.text,
+      borderBottomWidth: 1,
+      paddingBottom: vars.spacing.small
+    },
+    restoItemName: {
+      fontSize: 18,
+      fontWeight: "600" as "600"
     }
   })
 )
