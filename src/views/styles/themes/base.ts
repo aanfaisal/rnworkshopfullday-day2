@@ -12,7 +12,7 @@ export const BaseTheme = createTheme(
   },
   vars => ({
     screenContainer: {
-      flex:1,
+      flex: 1,
       padding: vars.spacing.normal,
       backgroundColor: vars.colors.background
     }
