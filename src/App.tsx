@@ -2,6 +2,7 @@ import { AppLoading, Asset } from 'expo'
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { MainScreen } from './views/screens/main'
+import { AppStyle } from './views/styles'
 
 interface State {
   ready: boolean
@@ -51,7 +52,11 @@ export default class App extends Component<any, State> {
    * to wrap your main view with neccessary provider as if needed.
    */
   renderMain() {
-    return <MainScreen />
+    return (
+      <AppStyle.Provider>
+        <MainScreen />
+      </AppStyle.Provider>
+    )
   }
 
   /**
